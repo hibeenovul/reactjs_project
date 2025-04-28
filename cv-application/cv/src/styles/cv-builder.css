@@ -79,3 +79,9 @@
     background-color: #218838;
   }
   
+  .preview {
+    background: white;
+    color: black;
+    padding: 20px;
+    min-height: 500px;
+  }

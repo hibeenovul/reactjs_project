@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {useRef} from "react";
-import { useReactToPrint } from "react-to-print";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 
 function Builder() {
     const [generalInfo, setGeneralInfo] = useState({
@@ -81,11 +83,45 @@ function Builder() {
 
     const previewRef = useRef();
 
-    const handlePrint = useReactToPrint({
-        content: () => previewRef.current,
-        documentTitle: 'CV',
-        onAfterPrint: () => alert('CV printed successfully!'),
-    });
+    const handleDownloadPDF = () => {
+        const previewElement = previewRef.current;
+        if (!previewElement) return;
+
+        // 🆕 Hide Edit button, Download button and "Preview Cv" heading
+        const elementsToHide = previewElement.querySelectorAll('.edit, .download-pdf, .preview h2');
+        elementsToHide.forEach((el) => {
+            el.style.display = 'none';
+        });
+
+        setTimeout(() => {
+            html2canvas(previewElement, { scale: 2 })
+                .then((canvas) => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.save('cv.pdf');
+
+                    // 🆕 Show everything back after download
+                    elementsToHide.forEach((el) => {
+                        el.style.display = 'block';
+                    });
+                })
+                .catch((err) => {
+                    console.error(err);
+
+                    // 🆕 Make sure buttons come back even if there is error
+                    elementsToHide.forEach((el) => {
+                        el.style.display = 'block';
+                    });
+                });
+        }, 300);
+    };
+    
+    
 
     return (
         <div className="cv-builder">
@@ -219,7 +255,7 @@ function Builder() {
                 </form>
             )   :   (
                 <div className="preview" ref={previewRef}>
-                    {/* preview content */}
+                    
                     <h2>Preview Cv</h2>
                     <h3>General Information</h3>
                     <p><strong>Name:</strong>{generalInfo.name}</p>
@@ -255,7 +291,7 @@ function Builder() {
                         <button onClick={handleEditCV}>Edit</button>
                     </div>
                     <div className="download-pdf">
-                        <button onClick={handlePrint}>Download PDF</button>
+                        <button onClick={handleDownloadPDF}>Download PDF</button>
                     </div>
                 </div>
             
