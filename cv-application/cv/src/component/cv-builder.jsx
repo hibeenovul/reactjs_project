@@ -39,7 +39,8 @@ function Builder() {
 
     const handleExperienceChange = (e) => {
         setExperienceInput({ ...experienceInput, [e.target.name]: e.target.value});
-    };
+    }; 
+
 
     const addEducation = () => {
         if (educationInput.school && educationInput.title && educationInput.date) {
@@ -87,7 +88,7 @@ function Builder() {
         const previewElement = previewRef.current;
         if (!previewElement) return;
 
-        // 🆕 Hide Edit button, Download button and "Preview Cv" heading
+        
         const elementsToHide = previewElement.querySelectorAll('.edit, .download-pdf, .preview h2');
         elementsToHide.forEach((el) => {
             el.style.display = 'none';
@@ -101,11 +102,12 @@ function Builder() {
 
                     const pdfWidth = pdf.internal.pageSize.getWidth();
                     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                    const filename = generalInfo.name.trim() !== '' ? `${generalInfo.name.replace(/\s+/g, '_')}` : 'cv.pdf'
 
                     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save('cv.pdf');
+                    pdf.save(filename);
 
-                    // 🆕 Show everything back after download
+                    
                     elementsToHide.forEach((el) => {
                         el.style.display = 'block';
                     });
@@ -113,7 +115,7 @@ function Builder() {
                 .catch((err) => {
                     console.error(err);
 
-                    // 🆕 Make sure buttons come back even if there is error
+                    
                     elementsToHide.forEach((el) => {
                         el.style.display = 'block';
                     });
@@ -204,7 +206,7 @@ function Builder() {
                         <div key={index}>
                             <p><strong>{exp.company}</strong> - {exp.position} </p>
                             <p>{exp.role} </p>
-                            <p>{exp.from} to {exp.to}</p>
+                            <p>{exp.from} - {exp.to}</p>
                             <button type="button" onClick={() => deleteExperience(index)}>Delete</button>
                         </div>
                     ))}
@@ -299,5 +301,4 @@ function Builder() {
         </div>
     );
 }
-
 export default Builder;

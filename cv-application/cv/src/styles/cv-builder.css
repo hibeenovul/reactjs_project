@@ -65,10 +65,20 @@
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
+    border: 2px solid black;
   }
+
   
   .preview p {
-    margin: 5px 0;
+    margin: 5px;
+    font-weight: 100;
+    font-size: 18px;
+  }
+  .preview h3 
+  {
+    border-bottom: 2px solid black;
+    font-weight: 700;
+    font-size: 30px;
   }
   
   .preview button {
@@ -79,9 +89,4 @@
     background-color: #218838;
   }
   
-  .preview {
-    background: white;
-    color: black;
-    padding: 20px;
-    min-height: 500px;
-  }
+ 
