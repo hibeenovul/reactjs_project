@@ -159,6 +159,7 @@ function Builder() {
                         onChange={handleGeneralChange}
                         required
                     />
+
                     <label>Address</label>
                     <input
                         type="text"
@@ -168,7 +169,6 @@ function Builder() {
                         required
                     />
 
-                    
                     <div className="education">
                         <h2>Education</h2>
                         <p>Please click on add Education after filling the form</p>
@@ -269,10 +269,12 @@ function Builder() {
                     
                     <h2>Preview Cv</h2>
                     <h3>General Information</h3>
+
                     <p><strong>{generalInfo.name}</strong></p>
                     <p><strong>{generalInfo.email}</strong></p>
                     <p><strong>{generalInfo.phone}</strong></p>
                     <p><strong>{generalInfo.address}</strong></p>
+
                     
                     {education.length > 0 && (
                         <>
