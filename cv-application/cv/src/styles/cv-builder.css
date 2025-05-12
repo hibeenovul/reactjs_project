@@ -1,0 +1,92 @@
+
+.cv-builder {
+    max-width: 600em;
+    margin: 0em;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+  }
+  .cv-builder h1
+  {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+  }
+  .general, .education, .experience
+  {
+    margin-top: 20px;
+  }
+
+  label
+  {
+    margin-top: -10px;
+  }
+
+  
+  .preview h3
+  {
+    text-align: left;
+  }
+  .education p, .experience p
+  {
+    text-align: center;
+    margin-top: -5px;
+    font-weight: 200;
+    font-size: 15px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input, textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px;
+    margin-top: 10px;
+    width: fit-content;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .preview {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid black;
+  }
+
+  
+  .preview p {
+    margin: 5px;
+    font-weight: 300;
+    font-size: 18px;
+  }
+  .preview h3 
+  {
+    border-bottom: 2px solid black;
+    font-weight: 700;
+    font-size: 30px;
+  }
+  
+  .preview button {
+    background-color: #28a745;
+  }
+  
+  .preview button:hover {
+    background-color: #218838;
+  }
+  
+ 
